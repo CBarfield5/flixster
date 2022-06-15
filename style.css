@@ -18,3 +18,16 @@
     max-height: 50px; 
     max-width: 45px;
 }
+
+.movie-object {
+    display: flex;
+}
+
+.movie-poster {
+    max-height: 200px;
+    max-width: 200px;
+}
+
+.movie-grid {
+    display: flex;
+}
