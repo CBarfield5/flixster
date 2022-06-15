@@ -110,11 +110,10 @@ const movieGridElement = document.querySelector('#movie-grid')
 function doSomething(movie) {
     console.log(movie);
     movieGridElement.innerHTML = movieGridElement.innerHTML + `
-    <div class="movie-object">
+    <div class="movie-card">
+        <img class="movie-poster" src="${imageBaseUrl}/w342${movie.posterPath}" alt="${movie.title}" title="${movie.title}"/>
         <p>${movie.title} </p>
         <p>Rating: ${movie.voteAverage}</p>
-        <img class="movie-poster" src="${imageBaseUrl}/w342${movie.posterPath}" alt="${movie.title}" title="${movie.title}"/>
-        <hr size="10" color="grey" >
     </div>
     `
 }
