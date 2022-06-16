@@ -34,8 +34,8 @@
 .movie-card:hover {
     background-color: #576065;
     cursor: pointer;
-    transform: translate(0,-5%);
-    transition-duration: 1s;
+    transform: translate(0,-1%);
+    transition-duration: .4s;
 }
 
 .movie-poster {
