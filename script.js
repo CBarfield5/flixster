@@ -90,18 +90,6 @@ const movies = [
    posterPath: "/zT5ynZ0UR6HFfWQSRf2uKtqCyWD.jpg",
    title: "Ambulance",
    voteAverage: 7
-   },
-   {
-   id: 648579,
-   posterPath: "/bmxCAO0tz79xn40swJAEIJPRnC1.jpg",
-   title: "The Unbearable Weight of Massive Talent",
-   voteAverage: 7.3
-   },
-   {
-   id: 361743,
-   posterPath: "/wxP2Mzv9CdjOK6t4dNnFGqIQl0V.jpg",
-   title: "Top Gun: Maverick",
-   voteAverage: 8.3
    }
 ];
 
@@ -112,8 +100,12 @@ function doSomething(movie) {
     movieGridElement.innerHTML = movieGridElement.innerHTML + `
     <div class="movie-card">
         <img class="movie-poster" src="${imageBaseUrl}/w342${movie.posterPath}" alt="${movie.title}" title="${movie.title}"/>
-        <p>${movie.title} </p>
-        <p>Rating: ${movie.voteAverage}</p>
+        <div class="movie-title">${movie.title} </div>
+        <div style="color: transparent"> e</div>
+        <div class="rating"> 
+            <img src="./images/star.png" alt="star" style="max-height: 10px; max width: 10px;"> </img>
+            ${movie.voteAverage}
+        </div>
     </div>
     `
 }
