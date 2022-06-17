@@ -48,12 +48,15 @@ Deployed Application (optional): [Flixster Deployed Site](ADD_LINK_HERE)
     <p>Flixster - 17 June 2022 - Watch Video</p>
     <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/fc79f2c3dc214262aa50b6c50a863a72-with-play.gif">
   </a>
+  
+![Video](https://cdn.loom.com/sessions/thumbnails/fc79f2c3dc214262aa50b6c50a863a72-with-play.gif)
+
 
 ### Reflection
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
-
+Yes, fetching data from API calls during gihpy party and also 
 
 * If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
   
