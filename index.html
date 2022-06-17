@@ -13,12 +13,18 @@
         <div class="heading">
             Flixster
         </div>
-        <input type="text" placeholder="Search">
+        <FORM class="form-head" NAME="myform" onSubmit="JavaScript:ExampleJS()">
+           <input class="search" type="text" id="fname" name="search" /><br />
+           <button onclick="queryFun()" class="load" role="button">CLEAR</button>
+       </FORM>
+       <button onclick="queryFun()" class="load" role="button">SEARCH</button>
     </div>
     <hr style="border: 3px solid black;">
     <div class="wrap"
         <div id="movie-grid"></div>
+        <button onclick="addNewMovies()" class="load" role="button">LOAD MORE</button>
     </div>
+    
     <script src="./script.js"></script>
 </body>
 </html>

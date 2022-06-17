@@ -4,6 +4,7 @@
     font-family: 'Bebas Neue', cursive;
     font-size: 400%;
     font-weight: 500;
+    padding-top: 9px;
 }
 
 .header {
@@ -29,13 +30,14 @@
     color: white;
     background-color: #2B3940;
     border-radius: 10px;
+    scroll-snap-align: start;
 }
 
 .movie-card:hover {
     background-color: #576065;
     cursor: pointer;
-    transform: translate(0,-1%);
-    transition-duration: .4s;
+    transform: translate(2%,-2%);
+    transition-duration: .3s;
 }
 
 .movie-poster {
@@ -80,6 +82,7 @@
     font-size: 13px;
     max-height: 100%;
     max-width: 100%;
+    scroll-snap-type: y mandatory;
 }
 
 .wrap {
@@ -91,4 +94,62 @@
 body {
     margin: 0px;
     background-color: #42A6D6;
+}
+
+.load {
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #2B3940;
+  border-radius: 15px;
+  box-sizing: border-box;
+  color: #2B3940;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  margin: auto;
+  min-height: 60px;
+  min-width: 0;
+  outline: none;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 20%;
+  will-change: transform;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+.load:disabled {
+  pointer-events: none;
+}
+
+.load:hover {
+  color: #fff;
+  background-color: #576065;
+  box-shadow: #45545d 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.load:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+
+.form-head {
+    display: flex;
+    padding-top: 30px;
+}
+
+.search {
+    align-self: middle;
 }
