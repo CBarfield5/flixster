@@ -22,7 +22,6 @@ async function fetchMe(page) {
 }
 
 
-
 function doSomething(movie) {
     // add catch for movies with no background
     movieGridElement.innerHTML = movieGridElement.innerHTML + `
@@ -96,3 +95,79 @@ async function addQueryMovies() {
 // })
 
 // fetchMovies(uri);
+
+const searchForm = document.getElementById('search-form');
+const searchInput = document.getElementById('search-input');
+const gifAreaDiv = document.getElementById('gif-area');
+const showMeMoreBtn = document.getElementById('show-me-more-btn');
+
+async function getResults(searchTerm) {
+    const offset = currentApiPage * pageSize;
+    const response = await fetch(`http://api.giphy.com/v1/gifs/search?q=${searchTerm}&limit=${pageSize}&offset=${offset}&api_key=${apiKey}`);
+    const jsonResponse = await response.json();
+    return jsonResponse.data;
+}
+
+/** On form submit, get results and add to list. */
+
+async function handleFormSubmit(event) {
+    event.preventDefault();
+    gifAreaDiv.innerHTML = '';
+    currentSearchTerm = searchInput.value;
+    const results = await getResults(currentSearchTerm);
+    displayResults(results);
+    searchInput.value = '';
+    currentApiPage++;
+    showMeMoreBtn.classList.remove('hidden');
+}
+
+searchForm.addEventListener('submit', handleFormSubmit);
+
+async function handleShowMeMoreClick(event) {
+    const results = await getResults(currentSearchTerm);
+    displayResults(results);
+    currentApiPage++;
+}
+
+showMeMoreBtn.addEventListener('click', handleShowMeMoreClick);
+
+function displayResults(results) {
+    const gifsHTMLString = results.map(gif => `
+        <div class="gif">
+            <img src="${gif.images.original.url}" />
+        </div>
+    `).join('');
+
+    gifAreaDiv.innerHTML = gifAreaDiv.innerHTML + gifsHTMLString;
+}
+
+const modal = document.querySelector(".modal");
+const trigger = document.querySelector(".trigger");
+const closeButton = document.querySelector(".close-button");
+
+function toggleModal() {
+    modal.classList.toggle("show-modal");
+}
+
+function windowOnClick(event) {
+    if (event.target === modal) {
+        toggleModal();
+    }
+}
+
+trigger.addEventListener("click", toggleModal);
+closeButton.addEventListener("click", toggleModal);
+window.addEventListener("click", windowOnClick);
+
+
+
+
+
+
+
+
+
+
+
+
+

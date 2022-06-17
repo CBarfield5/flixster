@@ -2,14 +2,14 @@
 
 .heading {
     font-family: 'Bebas Neue', cursive;
-    font-size: 400%;
+    font-size: 800%;
     font-weight: 500;
     padding-top: 9px;
 }
 
 .header {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items:center;
     column-gap: 10px;
     padding-bottom: 10px;
@@ -54,6 +54,7 @@
     /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
     /* grid-template-columns: repeat(4, 1fr); */
     grid-template-columns: repeat(5, minmax(0, 1fr));
+    margin: 10px;
 }
 
 .header input[type=text] {
@@ -152,4 +153,12 @@ body {
 
 .search {
     align-self: middle;
+}
+
+.search-box {
+    align-self: flex-end;
+    padding: 15px;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: black;
 }
