@@ -36,7 +36,7 @@ function displayResults(movie) {
         <div class="movie-title">${movie.original_title} </div>
         <div style="color: transparent"> e</div>
         <div class="rating"> 
-            <img src="./images/star.png" alt="star" style="max-height: 10px; max width: 10px;"> </img>
+            <img src="./images/star.png" alt="star" style="max-height: 17px; max width: 20px;"> </img>
             ${movie.vote_average}
         </div>
     </div>
