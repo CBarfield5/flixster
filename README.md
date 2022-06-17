@@ -2,11 +2,11 @@
 
 ## Week 1 Assignment: Flixster
 
-Submitted by: **NAME**
+Submitted by: Chris Barfield
 
-Estimated time spent: **#** hours spent in total
+Estimated time spent: 10 hours spent in total
 
-Deployed Application (optional): [Flixster Deployed Site](ADD_LINK_HERE)
+Deployed Application (optional): [Flixster Deployed Site](https://cbarfield5.github.io/flixster/)
 
 ### Application Features
 
