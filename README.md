@@ -45,7 +45,7 @@ Deployed Application (optional): [Flixster Deployed Site](https://cbarfield5.git
 `TODO://` Add the embedded URL code to your animated app walkthrough below, `ADD_EMBEDDED_CODE_HERE`. Make sure the video or gif actually renders and animates when viewing this README. (🚫 Remove this paragraph after adding walkthrough video)
 
   
-![Video](https://cdn.loom.com/sessions/thumbnails/fc79f2c3dc214262aa50b6c50a863a72-with-play.gif)
+![Video](https://cdn.loom.com/sessions/thumbnails/fc79f2c3dc214262aa50b6c50a863a72-1655509128662-with-play.gif)
 
 
 ### Reflection
