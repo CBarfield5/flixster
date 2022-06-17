@@ -1,121 +1,57 @@
-const imageBaseUrl = 'https://image.tmdb.org/t/p';
- 
+// Global Constants
+const apiKey = 'ADD_API_KEY';
+const pageSize = 9;
+
+// Global Variables
+var currentApiPage = 0;
+var currentSearchTerm = '';
+
+// Page Elements
+const searchForm = document.getElementById('search-form');
+const searchInput = document.getElementById('search-input');
+const gifAreaDiv = document.getElementById('gif-area');
+const showMeMoreBtn = document.getElementById('show-me-more-btn');
 const movieGridElement = document.querySelector('#movie-grid');
+const imageBaseUrl = 'https://image.tmdb.org/t/p';
 
-const uri = "https://api.themoviedb.org/3/movie/now_playing?api_key=7cc0f39ba93ab5bf2f814d6f152fd843&language=en-US&page=";
 
-let isQue = false;
-
-async function fetchMe(page) {
-    if(isQue) {
-        fetchMe1();
-    } else {
-        uriVal = uri + page
-        const response = await fetch(uriVal);
-        const data = await response.json();
-        const resultData = await data.results;
-    
-        resultData.forEach(element => {
-            doSomething(element);
-        });
-    }
+let pageOn = 1
+/** Get results from API. */
+async function getResults(query) {
+    const response1 = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=7cc0f39ba93ab5bf2f814d6f152fd843&language=en-US&query=${query}&page=${pageOn}&include_adult=false`);
+    const data1 = await response1.json();
+    const resultData1 = await data1.results;
+    return resultData1;
 }
 
-
-function doSomething(movie) {
-    // add catch for movies with no background
+/** Render list of results. */
+function displayResults(movie) {
+    let poster = movie.poster_path;
+    if (movie.poster_path == null){
+        poster = "/dykOcAqI01Fci5cKQW3bEUrPWwU.jpg";
+    }
     movieGridElement.innerHTML = movieGridElement.innerHTML + `
     <div class="movie-card">
-        <img class="movie-poster" src="${imageBaseUrl}/original${movie.poster_path}" alt="${movie.title}" title="${movie.title}"/>
+        <img class="movie-poster" src="${imageBaseUrl}/original${poster}" alt="${movie.title}" title="${movie.title}"/>
         <div class="movie-title">${movie.original_title} </div>
         <div style="color: transparent"> e</div>
         <div class="rating"> 
-            <img src="./images/star.png" alt="star" style="max-height: 10px; max width: 10px;"> </img>
+            <img src="./images/star.png" alt="star" style="max-height: 17px; max width: 20px;"> </img>
             ${movie.vote_average}
         </div>
     </div>
     `
 }
 
-addNewMovies();
-
-let curr = 1 
-
-async function addNewMovies() {
-    curr += 1;
-    await fetchMe(curr);
-}
-
-async function searchSubmit() {
-
-}
-
-
-let tracker = false;
-async function queryFun(){
-    isQue = true
-    var title = document.getElementById("fname").value;
-    if(tracker) {
-        window.location.reload();
-        fetchMe1(title);
-    }
-    console.log('jFirst: ', title);
-    await fetchMe1(title);
-    //alert("Your name is: " + title);
-
-    tracker = !tracker
-} 
-
-
-let pageOn = 1
-async function fetchMe1(query) {
-    pageOn += 1;
-    const response1 = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=7cc0f39ba93ab5bf2f814d6f152fd843&language=en-US&query=${query}&page=${pageOn}&include_adult=false`);
-    const data1 = await response1.json();
-    const resultData1 = await data1.results;
-    console.log('resultData1: ', resultData1);
-
-    resultData1.forEach(element => {
-        doSomething(element);
-    });
-    
-}
-
-let que = 1; 
-
-async function addQueryMovies() {
-    que += 1;
-    await fetchMe1(curr);
-}
-
-
-// searchFormElement.addEventListener('submit', (event) => {
-//     event.preventDefault();
-//     fetchMovies();
-// })
-
-// fetchMovies(uri);
-
-const searchForm = document.getElementById('search-form');
-const searchInput = document.getElementById('search-input');
-const gifAreaDiv = document.getElementById('gif-area');
-const showMeMoreBtn = document.getElementById('show-me-more-btn');
-
-async function getResults(searchTerm) {
-    const offset = currentApiPage * pageSize;
-    const response = await fetch(`http://api.giphy.com/v1/gifs/search?q=${searchTerm}&limit=${pageSize}&offset=${offset}&api_key=${apiKey}`);
-    const jsonResponse = await response.json();
-    return jsonResponse.data;
-}
-
 /** On form submit, get results and add to list. */
-
 async function handleFormSubmit(event) {
     event.preventDefault();
-    gifAreaDiv.innerHTML = '';
+    movieGridElement.innerHTML = '';
     currentSearchTerm = searchInput.value;
     const results = await getResults(currentSearchTerm);
-    displayResults(results);
+    results.forEach(Element => {
+        displayResults(Element);
+    });
     searchInput.value = '';
     currentApiPage++;
     showMeMoreBtn.classList.remove('hidden');
@@ -124,50 +60,81 @@ async function handleFormSubmit(event) {
 searchForm.addEventListener('submit', handleFormSubmit);
 
 async function handleShowMeMoreClick(event) {
-    const results = await getResults(currentSearchTerm);
-    displayResults(results);
-    currentApiPage++;
+    pageOn++;
+    if(currentSearchTerm == '') {
+        const results = await getTop();
+        results.forEach(Element => {
+        displayResults(Element);
+    });
+    } else {
+        const results = await getResults(currentSearchTerm);
+        results.forEach(Element => {
+            displayResults(Element);
+        });
+    }
 }
 
 showMeMoreBtn.addEventListener('click', handleShowMeMoreClick);
 
-function displayResults(results) {
-    const gifsHTMLString = results.map(gif => `
-        <div class="gif">
-            <img src="${gif.images.original.url}" />
-        </div>
-    `).join('');
-
-    gifAreaDiv.innerHTML = gifAreaDiv.innerHTML + gifsHTMLString;
+async function loadInitial() {
+    const results = await getTop();
+    results.forEach(Element => {
+        displayResults(Element);
+    });
 }
 
-const modal = document.querySelector(".modal");
-const trigger = document.querySelector(".trigger");
-const closeButton = document.querySelector(".close-button");
-
-function toggleModal() {
-    modal.classList.toggle("show-modal");
+async function getTop() {
+    const response1 = await fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=7cc0f39ba93ab5bf2f814d6f152fd843&language=en-US&page=${pageOn}`);
+    const data1 = await response1.json();
+    const resultData1 = await data1.results;
+    return resultData1;
 }
 
-function windowOnClick(event) {
-    if (event.target === modal) {
-        toggleModal();
+//
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Functions to open and close a modal
+    function openModal($el) {
+      $el.classList.add('is-active');
     }
-}
+  
+    function closeModal($el) {
+      $el.classList.remove('is-active');
+    }
+  
+    function closeAllModals() {
+      (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+        closeModal($modal);
+      });
+    }
+  
+    // Add a click event on buttons to open a specific modal
+    (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
+      const modal = $trigger.dataset.target;
+      const $target = document.getElementById(modal);
+  
+      $trigger.addEventListener('click', () => {
+        openModal($target);
+      });
+    });
+  
+    // Add a click event on various child elements to close the parent modal
+    (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+      const $target = $close.closest('.modal');
+  
+      $close.addEventListener('click', () => {
+        closeModal($target);
+      });
+    });
+  
+    // Add a keyboard event to close all modals
+    document.addEventListener('keydown', (event) => {
+      const e = event || window.event;
+  
+      if (e.keyCode === 27) { // Escape key
+        closeAllModals();
+      }
+    });
+  });
 
-trigger.addEventListener("click", toggleModal);
-closeButton.addEventListener("click", toggleModal);
-window.addEventListener("click", windowOnClick);
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
