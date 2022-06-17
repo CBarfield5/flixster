@@ -52,15 +52,15 @@ Deployed Application (optional): [Flixster Deployed Site](ADD_LINK_HERE)
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
-Yes, fetching data from API calls during gihpy party and also 
+Yes, fetching data from API calls during the gihpy party lab and also generating HTML from javascript during the first two labs. I felt unprepared to complete the stretch goal of on-click popups.
 
 * If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
   
-Add your response here
+I would have focused more on functionality than the visual aspects. I would have liked to add the popup feature and embedded youtube videos.
 
 * Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
 
-Add your response here
+The demo went as expected. I would like to try using some CSS frameworks which many others in the class used to better style the website.
 
 ### Open-source libraries used
 
